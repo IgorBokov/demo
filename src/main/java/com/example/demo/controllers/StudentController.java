@@ -51,20 +51,26 @@ public class StudentController {
     @GetMapping("/editStudent/{id}")
     public String editStudent(@PathVariable(value = "id") long id, Model model) {
         Optional<Student> student = studentRepository.findById(id);
-        model.addAttribute("student", student);
+        model.addAttribute("student", student.get()); //student.get()
         return "editStudent";
     }
 
-    @PostMapping("/editStudent/{id}")
+    @PostMapping("/editStudent")
     public String modifyStudent(
-            @PathVariable(value = "id") long id,
+            @RequestParam long id,
             @RequestParam @NotBlank String lastname,   /*принимаем данные из <form action="/addStudent" method="post">*/
             @RequestParam @NotBlank String name,
             @RequestParam @NotBlank String stream_group,
             @RequestParam @NotNull Date date
-
     ) {
-        return "editStudent";
+        Optional<Student> student = studentRepository.findById(id);
+        Student student1  = student.get();
+        student1.name = name;
+        student1.lastname = lastname;
+        student1.stream_group = stream_group;
+        student1.date = date;
+        studentRepository.save(student1);       /*сохраняем полученные данные в DB*/
+        return "redirect:/students";
     }
 
     @GetMapping("/deleteStudent/{id}")

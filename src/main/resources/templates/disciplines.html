@@ -9,32 +9,29 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<h2 class="text-center my-3">Список студентов</h2>
+<section class="title text-center mb-5">
+    <h2>Система управления студентами и их успеваемостью</h2>
+</section>
 <div class="container">
-    <table class="table">
+    <table class="table text-center">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Фамилия</th>
-            <th scope="col">Группа</th>
+            <th scope="col">Наименование дисциплины</th>
             <th scope="col">Статус</th>
-            <th scope="col">Дата зачисления</th>
             <th scope="col">Управление</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="el : ${students}">
+        <tr th:each="el : ${disciplines}">
             <th scope="row" th:text="${el.id}"></th>
-            <td th:text="${el.name}"/>
-            <td th:text="${el.lastname}"/>
-            <td th:text="${el.stream_group}"/>
+            <td th:text="${el.discipline}"/>
             <td th:text="${el.status}"/>
-            <td th:text="${el.date}"/>
             <td>
-                <a th:href="'/editStudent/'+${el.id}" class="btn btn-primary me-3" title="Редактировать студента"><i
+                <a th:href="'/editDiscipline/'+${el.id}" class="btn btn-primary me-3"
+                   title="Редактировать дисциплину"><i
                         class="fa-solid fa-pencil"></i></a>
-                <a th:href="'/deleteStudent/'+${el.id}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                <a th:href="'/deleteDiscipline/'+${el.id}" class="btn btn-danger" title="Удалить дисциплину"><i class="fa-solid fa-trash-can"></i></a>
             </td>
         </tr>
         </tbody>
