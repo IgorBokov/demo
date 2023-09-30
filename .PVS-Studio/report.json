@@ -2,15 +2,11 @@
   "version": 2,
   "warnings": [
     {
-      "code": "Trial",
+      "code": "Renew",
       "cwe": 0,
-      "level": 0,
+      "level": 1,
       "positions": [],
-      "message": "License was not entered. Please enter a valid PVS-Studio license or request a trial license at https://pvs-studio.com/en/pvs-studio/try-free/.",
-      "stacktrace": [
-        "com.pvsstudio.Main.checkLicenseInNewJavaAnalyzerCoreProcess(Main.java:279)",
-        "com.pvsstudio.Main.main(Main.java:572)"
-      ],
+      "message": "Your license will expire in 7 days. Click \u0027Renew\u0027 to learn more or contact us at support@viva64.com.",
       "projects": [],
       "favorite": false,
       "falseAlarm": false

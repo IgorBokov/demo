@@ -10,7 +10,7 @@
 </head>
 <body>
 <section class="title text-center mb-5">
-    <h2>Система управления студентами и их успеваемостью</h2>
+    <h2>Управление дисциплинами</h2>
 </section>
 <div class="container">
     <table class="table text-center">
@@ -28,6 +28,7 @@
             <td th:text="${el.discipline}"/>
             <td th:text="${el.status}"/>
             <td>
+                <a th:href="'/addDiscipline'" class="btn btn-success me-3" title="Добавить дисциплину"><i class="fa-solid fa-user-plus"></i></a>
                 <a th:href="'/editDiscipline/'+${el.id}" class="btn btn-primary me-3"
                    title="Редактировать дисциплину"><i
                         class="fa-solid fa-pencil"></i></a>

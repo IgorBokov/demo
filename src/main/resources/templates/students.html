@@ -32,9 +32,11 @@
             <td th:text="${el.status}"/>
             <td th:text="${el.date}"/>
             <td>
+                <a th:href="'/addStudent'" class="btn btn-success me-3" title="Добавить студента"><i class="fa-solid fa-user-plus"></i></a>
                 <a th:href="'/editStudent/'+${el.id}" class="btn btn-primary me-3" title="Редактировать студента"><i
                         class="fa-solid fa-pencil"></i></a>
-                <a th:href="'/deleteStudent/'+${el.id}" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                <a th:href="'/deleteStudent/'+${el.id}" class="btn btn-danger" title="Удалить студента"><i class="fa-solid fa-trash-can"></i></a>
+
             </td>
         </tr>
         </tbody>
