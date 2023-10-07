@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Discipline;
 import com.example.demo.models.Student;
+import com.example.demo.repository.DisciplineRepository;
 import com.example.demo.repository.StudentRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +24,17 @@ public class StudentController {
     @Autowired                                   /*авто подключение*/
     private StudentRepository studentRepository; /*подключили интерфейс StudentRepository и у studentRepository
                                                   есть функции CRUD - Create, Read, Update, Delete*/
+    @Autowired
+    private DisciplineRepository disciplineRepository;
+
+    @GetMapping("/student/{id}")
+    public String showStudent(@PathVariable(value = "id") long id, Model model) {
+        Optional<Student> student = studentRepository.findById(id);
+        model.addAttribute("student", student.get()); //student.get()
+        Iterable<Discipline> disciplines = disciplineRepository.findAll();
+        model.addAttribute("disciplines", disciplines);
+        return "student";
+    }
 
     @GetMapping("/addStudent")
     public String addStudent() {
@@ -64,7 +77,7 @@ public class StudentController {
             @RequestParam @NotNull Date date
     ) {
         Optional<Student> student = studentRepository.findById(id);
-        Student student1  = student.get();
+        Student student1 = student.get();
         student1.name = name;
         student1.lastname = lastname;
         student1.stream_group = stream_group;
