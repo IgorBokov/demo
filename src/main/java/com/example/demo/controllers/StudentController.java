@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.BindStudentDiscipline;
 import com.example.demo.models.Discipline;
 import com.example.demo.models.Student;
+import com.example.demo.repository.BindStudentDisciplineRepository;
 import com.example.demo.repository.DisciplineRepository;
 import com.example.demo.repository.StudentRepository;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Validated
@@ -26,14 +29,29 @@ public class StudentController {
                                                   есть функции CRUD - Create, Read, Update, Delete*/
     @Autowired
     private DisciplineRepository disciplineRepository;
+    @Autowired
+    private BindStudentDisciplineRepository bindStudentDisciplineRepository;
 
     @GetMapping("/student/{id}")
     public String showStudent(@PathVariable(value = "id") long id, Model model) {
         Optional<Student> student = studentRepository.findById(id);
-        model.addAttribute("student", student.get()); //student.get()
+        model.addAttribute("student", student.get());              //student.get()
         Iterable<Discipline> disciplines = disciplineRepository.findAll();
         model.addAttribute("disciplines", disciplines);
         return "student";
+    }
+
+    @PostMapping("/student")
+    public String studentPerfomance(
+            @RequestParam long id,
+            @RequestParam(value = "selectedOptions", required = false) List<Long> selectedOptions
+    ) {
+        if (selectedOptions != null) {
+            for (Long option : selectedOptions) {
+                System.out.println(option);
+            }
+        }
+        return "redirect:/student";
     }
 
     @GetMapping("/addStudent")
@@ -77,7 +95,7 @@ public class StudentController {
             @RequestParam @NotNull Date date
     ) {
         Optional<Student> student = studentRepository.findById(id);
-        Student student1 = student.get();
+        Student student1 = student.get();   //сохранили все полученные данные из БД таб student в student1
         student1.name = name;
         student1.lastname = lastname;
         student1.stream_group = stream_group;

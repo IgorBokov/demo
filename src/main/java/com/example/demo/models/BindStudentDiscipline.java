@@ -13,4 +13,13 @@ public class BindStudentDiscipline {
     public Long id;
     public Long student_id;
     public Long discipline_id;
+
+    public BindStudentDiscipline() {
+    }
+
+    public BindStudentDiscipline(Long student_id, Long discipline_id) {
+        this.student_id = student_id;
+        this.discipline_id = discipline_id;
+    }
+
 }
