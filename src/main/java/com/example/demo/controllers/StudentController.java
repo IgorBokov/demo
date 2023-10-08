@@ -46,9 +46,13 @@ public class StudentController {
             @RequestParam long id,
             @RequestParam(value = "selectedOptions", required = false) List<Long> selectedOptions
     ) {
+       Optional<BindStudentDiscipline> bindStudentDiscipline = bindStudentDisciplineRepository.findById(id);
+       BindStudentDiscipline bindStudentDiscipline1 = bindStudentDiscipline.get();
         if (selectedOptions != null) {
             for (Long option : selectedOptions) {
-                System.out.println(option);
+                bindStudentDiscipline1.discipline_id = option;
+                bindStudentDiscipline1.student_id = id;
+                bindStudentDisciplineRepository.save(bindStudentDiscipline1);       /*сохраняем полученные данные в DB*/
             }
         }
         return "redirect:/student";
